@@ -62,7 +62,8 @@
     <div id="add_task_popup" class="popup hide-slide">
         <div class="flex-container w-per-5 mt-3">
             <div class="flex-item wrap w-per-10 ">
-                <div class="flex-content w-per-8">
+                <div class="flex-content aic w-per-8">
+                    <h2>Add Task</h2>
                     <form action="{{ route('add-task',['id_brief'=>$data->id_brief]) }}" method="POST" class="flex-form p-3" id="tasks_form">
                         <h2 class="form-title mb-3" id="task_brief_name"></h2>
                         {{ csrf_field() }}
