@@ -31,19 +31,19 @@ class ApprController extends Controller
     function update_appr(Request $req, $id_appr)
     {
         $appr = Apprenant::find($id_appr);
-        $appr->nom = $req->nom;
-        $appr->prenom = $req->prenom;
-        $appr->email = $req->email;
-        $appr->telephone = $req->telephone;
-        $appr->CIN = $req->CIN;
-        $appr->date_naissance = $req->date_naissance;
-        $appr->parent_telephone = $req->parent_telephone;
-        $appr->address = $req->address;
-        $appr->filiere = $req->filiere;
+        $appr->nom = $req->nom_e;
+        $appr->prenom = $req->prenom_e;
+        $appr->email = $req->email_e;
+        $appr->telephone = $req->telephone_e;
+        $appr->CIN = $req->CIN_e;
+        $appr->date_naissance = $req->date_naissance_e;
+        $appr->parent_telephone = $req->parent_telephone_e;
+        $appr->address = $req->address_e;
+        $appr->filiere = $req->filiere_e;
 
-        $appr->promo_id = $req->id_promo;
+        $appr->promo_id = $req->id_promo_e;
         $appr->save();
-        return redirect(route('edit-promotion', ['id' => $req->id_promo]));
+        return redirect(route('edit-promotion', ['id' => $req->id_promo_e]));
     }
 
     function edit_appr($id_appr)
@@ -60,7 +60,7 @@ class ApprController extends Controller
             ->where('apprenants.id', $id_appr)
             ->get();
         $prom = promotion::find($data[0]->id_prom)->get();
-        return view('edit_appr', compact('data', 'prom'));
+        return view('apprenant/edit_appr', compact('data', 'prom'));
     }
 
     function delete_appr($id_appr)
@@ -78,6 +78,13 @@ class ApprController extends Controller
                 email like '%$name%'
             )
         ")->get();
-        return view('search_appr', compact('appr'));
+        return view('apprenant/search_appr', compact('appr'));
+    }
+
+    
+    public function get_appr($id)
+    {
+        $data = Apprenant::where('id', $id)->get();
+        return $data;
     }
 }
