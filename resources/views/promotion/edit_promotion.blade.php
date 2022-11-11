@@ -30,19 +30,6 @@
                         @endforeach
                     </select>
                 </label>
-                
-                <ul class="ml-5">
-                    @if (count($briefs) > 0)
-                    <h3>Briefs assigned to this promotion:</h3>
-                        @foreach ($briefs[0] as $brief)
-                            <li>
-                                {{ $brief->title_brief }}
-                            </li>
-                        @endforeach
-                    @else
-                            <h3>no briefs assigned to this promotion!</h3>
-                    @endif
-                </ul>
             </div>
         </div>
 
