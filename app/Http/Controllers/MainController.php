@@ -32,23 +32,6 @@ class MainController extends Controller
 
     public function edit_promotion($id)
     {
-        // $data = Apprenant::select(
-        //     'promotions.id as id_prom',
-        //     'apprenants.id as id_appr',
-        //     'promotions.nom as nom_prom',
-        //     'apprenants.nom as nom_appr',
-        //     'apprenants.prenom',
-        //     'apprenants.email',
-        //     'apprenants.telephone',
-        //     'apprenants.CIN',
-        //     'apprenants.date_naissance',
-        //     'apprenants.parent_telephone',
-        //     'apprenants.address',
-        //     'apprenants.filiere'
-        // )
-        //     ->rightJoin('promotions', 'promotions.id', '=', 'apprenants.promo_id')
-        //     ->where('promotions.id', $id)
-        //     ->get();
         $data = promotion::where('id', $id)->first();
         $assigned_briefs = [];
         $data->apprenants;
