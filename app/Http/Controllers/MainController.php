@@ -32,26 +32,34 @@ class MainController extends Controller
 
     public function edit_promotion($id)
     {
-        $data = Apprenant::select(
-            'promotions.id as id_prom',
-            'apprenants.id as id_appr',
-            'promotions.nom as nom_prom',
-            'apprenants.nom as nom_appr',
-            'apprenants.prenom',
-            'apprenants.email',
-            'apprenants.telephone',
-            'apprenants.CIN',
-            'apprenants.date_naissance',
-            'apprenants.parent_telephone',
-            'apprenants.address',
-            'apprenants.filiere'
-        )
-            ->rightJoin('promotions', 'promotions.id', '=', 'apprenants.promo_id')
-            ->where('promotions.id', $id)
-            ->get();
+        // $data = Apprenant::select(
+        //     'promotions.id as id_prom',
+        //     'apprenants.id as id_appr',
+        //     'promotions.nom as nom_prom',
+        //     'apprenants.nom as nom_appr',
+        //     'apprenants.prenom',
+        //     'apprenants.email',
+        //     'apprenants.telephone',
+        //     'apprenants.CIN',
+        //     'apprenants.date_naissance',
+        //     'apprenants.parent_telephone',
+        //     'apprenants.address',
+        //     'apprenants.filiere'
+        // )
+        //     ->rightJoin('promotions', 'promotions.id', '=', 'apprenants.promo_id')
+        //     ->where('promotions.id', $id)
+        //     ->get();
+        $data = promotion::where('id', $id)->first();
+        $assigned_briefs = [];
+        $data->apprenants;
+        foreach ($data->apprenants as $appr) {
+            $assigned_briefs[] = $appr->briefs;
+        }
+        $briefs = collect($assigned_briefs)->unique('pivot');
+
         // return $data;
         $prom = promotion::all();
-        return view('promotion/edit_promotion', compact("data", "prom"));
+        return view('promotion/edit_promotion', compact("data", "prom", "briefs"));
     }
 
     public function update_promotion($id, Request $req)

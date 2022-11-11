@@ -12,4 +12,8 @@ class Apprenant extends Model
     public function promotion(){
         return $this->belongsTo(promotion::class, 'promo_id');
     }
+
+    public function briefs(){
+        return $this->belongsToMany(Brief::class, 'brief_student', 'id_appr', 'id_brief');
+    }
 }

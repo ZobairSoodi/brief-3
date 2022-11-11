@@ -369,6 +369,40 @@ td a:nth-child(2) {
   background-color: rgb(72, 72, 118);
 }
 
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+}
+.delete-icon i {
+  color: rgb(172, 58, 58);
+  font-size: 25px;
+}
+.delete-icon i:hover {
+  color: rgb(143, 41, 41);
+}
+.delete-icon:hover {
+  background-color: transparent;
+}
+
+.add-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+}
+.add-icon i {
+  color: rgb(42, 139, 53);
+  font-size: 25px;
+}
+.add-icon i:hover {
+  color: rgb(32, 110, 41);
+}
+.add-icon:hover {
+  background-color: transparent;
+}
+
 .flex {
   display: flex !important;
 }
@@ -420,6 +454,30 @@ td a:nth-child(2) {
   top: 0;
   left: 0;
   z-index: 99;
+}
+
+.w-0 {
+  width: 0px !important;
+}
+
+.h-0 {
+  min-height: 0px !important;
+}
+
+.h-min-0 {
+  min-height: 0px !important;
+}
+
+.w-min-0 {
+  min-width: 0px !important;
+}
+
+.w-max-0 {
+  max-width: 0px !important;
+}
+
+.h-max-0 {
+  max-height: 0px !important;
 }
 
 .w-1 {
@@ -902,6 +960,14 @@ td a:nth-child(2) {
   max-height: 400px !important;
 }
 
+.w-per-0 {
+  width: 0% !important;
+}
+
+.h-per-0 {
+  height: 0% !important;
+}
+
 .w-per-1 {
   width: 10% !important;
 }
@@ -980,6 +1046,66 @@ td a:nth-child(2) {
 
 .h-per-10 {
   height: 100% !important;
+}
+
+.p-0 {
+  padding: 0px !important;
+}
+
+.px-0 {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.py-0 {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.pr-0 {
+  padding-right: 0px !important;
+}
+
+.pl-0 {
+  padding-left: 0px !important;
+}
+
+.pt-0 {
+  padding-top: 0px !important;
+}
+
+.pb-0 {
+  padding-bottom: 0px !important;
+}
+
+.m-0 {
+  margin: 0px !important;
+}
+
+.mx-0 {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.my-0 {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.mr-0 {
+  margin-right: 0px !important;
+}
+
+.ml-0 {
+  margin-left: 0px !important;
+}
+
+.mt-0 {
+  margin-top: 0px !important;
+}
+
+.mb-0 {
+  margin-bottom: 0px !important;
 }
 
 .p-1 {

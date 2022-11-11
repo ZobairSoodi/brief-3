@@ -392,8 +392,48 @@ td a:nth-child(2) {
     color: white;
     background-color: rgb(93, 93, 154);
 
-    &:hover{
+    &:hover {
         background-color: rgb(72, 72, 118);
+    }
+}
+
+.delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+
+    i {
+        color: rgb(172, 58, 58);
+        font-size: 25px;
+
+        &:hover {
+            color: rgb(143, 41, 41);
+        }
+    }
+
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+.add-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+
+    i {
+        color: rgb(42, 139, 53);
+        font-size: 25px;
+
+        &:hover {
+            color: rgb(32, 110, 41);
+        }
+    }
+
+    &:hover {
+        background-color: transparent;
     }
 }
 
@@ -450,7 +490,7 @@ td a:nth-child(2) {
     z-index: 99;
 }
 
-@for $i from 1 to 21 {
+@for $i from 0 to 21 {
     .w-#{$i * 1} {
         width: $i * 50px !important;
     }
@@ -470,21 +510,23 @@ td a:nth-child(2) {
     .w-max-#{$i * 1} {
         max-width: $i * 20px !important;
     }
+
     .h-max-#{$i * 1} {
         max-height: $i * 20px !important;
     }
 }
 
-@for $i from 1 to 11 {
+@for $i from 0 to 11 {
     .w-per-#{$i * 1} {
         width: $i * 10% !important;
     }
+
     .h-per-#{$i * 1} {
         height: $i * 10% !important;
     }
 }
 
-@for $i from 1 to 6 {
+@for $i from 0 to 6 {
 
     .p-#{$i} {
         padding: $i * 5px !important;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apprenant;
 use App\Models\Brief;
 use App\Models\briefStudent;
+use App\Models\promotion;
 use Illuminate\Http\Request;
 
 class BriefController extends Controller
@@ -53,37 +54,42 @@ class BriefController extends Controller
 
     function show_assign_brief($id_brief)
     {
-        $appr = Apprenant::all();
-        return view("", compact("appr", "id_brief"));
+        $data = Apprenant::all();
+        foreach ($data as $appr) {
+            $appr->has_brief = false;
+            $appr->briefs;
+            foreach ($appr->briefs as $brief) {
+                if($brief->id_brief == $id_brief){
+                    $appr->has_brief = true;
+                }
+            }
+        }
+        $prom = promotion::all();
+        return view("brief/brief_assign", compact("data", "id_brief", "prom"));
+        // return $data;
     }
 
     function assign_brief($id_brief, $id_appr)
     {
-        $row = briefStudent::where("id_brief", $id_brief)->where("id_appr", $id_appr)->first();
-        if (count($row) > 0) {
-            $row->delete();
-            return redirect("");
-        } else {
-            $obj = new briefStudent();
-            $obj->id_brief = $id_brief;
-            $obj->id_appr = $id_appr;
-            return redirect("");
-        }
+        $appr = Apprenant::where("id", $id_appr)->first();
+        $appr->briefs()->attach($id_brief);
+        return redirect(route('show-assign-brief', ['id_brief'=>$id_brief]));
     }
 
-    // Alternative function to assign_brief
-    function assign_brief_alt($id_brief, $id_appr, $arg)
+    function unassign_brief($id_brief, $id_appr)
     {
-        if ($arg == "add") {
-            $row = new briefStudent();
-            $row->id_brief = $id_brief;
-            $row->id_appr = $id_appr;
-            $row->save();
-            return redirect("");
-        } else if ($arg == "remove") {
-            $row = briefStudent::where("id_brief", $id_brief)->where("id_appr", $id_appr);
-            $row->delete();
-            return redirect("");
+        $appr = Apprenant::where("id", $id_appr)->first();
+        $appr->briefs()->detach($id_brief);
+        return redirect(route('show-assign-brief', ['id_brief'=>$id_brief]));
+    }
+
+    function assign_brief_all($id_brief){
+        $appr = Apprenant::all();
+        foreach ($appr as $row) {
+            if(!$row->briefs()->exists()){
+                $row->briefs()->attach($id_brief);
+            }
         }
+        return redirect(route('show-assign-brief', ['id_brief'=>$id_brief]));
     }
 }

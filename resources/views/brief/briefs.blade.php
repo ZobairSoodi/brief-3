@@ -13,10 +13,12 @@
                     </div>
                     <div class="flex-actions">
                         <a class="btn details-btn mr-1 ml-1" id-value="{{ $row->id_brief }}">Details</a>
-                        <a class="btn tasks-btn mr-1 ml-1" href="{{ route('show-tasks', ['id_brief'=> $row->id_brief ]) }}">Tasks</a>
-                        <a class="btn delete-btn"
-                            href="{{ route('delete-brief', ['id_brief' => $row->id_brief]) }}">Delete</a>
+                        <a class="btn tasks-btn mr-1 ml-1"
+                            href="{{ route('show-tasks', ['id_brief' => $row->id_brief]) }}">Tasks</a>
+                        <a class="btn btn mr-1 ml-1" href="{{ route('show-assign-brief', ['id_brief' => $row->id_brief]) }}"
+                            id-value="{{ $row->id_brief }}">Assign</a>
                     </div>
+                    <a class="btn delete-btn delete-icon p-1" href="{{ route('delete-brief', ['id_brief' => $row->id_brief]) }}"><i class="fa-solid fa-circle-xmark"></i></a>
                 </div>
             @endforeach
         @endif

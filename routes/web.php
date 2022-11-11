@@ -64,10 +64,11 @@ Route::get('briefs/{id_brief}/delete', [BriefController::class, 'delete_brief'])
 
 Route::get('briefs/{id_brief}/assign', [BriefController::class, 'show_assign_brief'])->name('show-assign-brief');
 
-Route::post('briefs/{id_brief}/assign/{id_appr}', [BriefController::class, 'assign_brief'])->name('assign-brief');
+Route::get('briefs/{id_brief}/assign/{id_appr}', [BriefController::class, 'assign_brief'])->name('assign-brief');
 
-// ------ Alternative function to assign_brief ------ //
-// Route::post('briefs/{id_brief}/assign/{id_appr}/{arg}', [BriefController::class, 'assign_brief_alt'])->name('assign-brief-alt');
+Route::get('briefs/{id_brief}/unassign/{id_appr}', [BriefController::class, 'unassign_brief'])->name('unassign-brief');
+
+Route::get('briefs/{id_brief}/assign_all', [BriefController::class, 'assign_brief_all'])->name('assign-brief-all');
 
 Route::get('briefs/{id_brief}/get', [BriefController::class, 'get_brief'])->name('get-brief');
 

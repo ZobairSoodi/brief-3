@@ -11,22 +11,38 @@
             <h1>Promotion:</h1>
             <div>
 
-                {{-- <form action="{{ route('update-promotion', ['id' => $data[0]->id_prom]) }}" method="POST">
-                     --}}
+                <form action="{{ route('update-promotion', ['id' => $data->id]) }}" method="POST">
+
                     {{ csrf_field() }}
-                    <label>Nom: <input type="text" name="nom" value="{{ $data[0]->nom_prom }}"></label>
-                    <label><span>Promotion: </span>
-                        <select name="select_promo" id="select_promo">
-                            @foreach ($prom as $row)
-                                <option value="{{ $row->id }}" @if ($row->id == $data[0]->id_prom) selected @endif>
-                                    {{ $row->nom }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </label>
-                    <input type="hidden" name="id" value="{{ $data[0]->id_prom }}">
+                    <label>Nom: <input type="text" name="nom" value="{{ $data->nom }}"></label>
+
+                    <input type="hidden" name="id" value="{{ $data->id }}">
                     <input type="submit" name="edit_promotion">
-                {{-- </form> --}}
+                </form>
+            </div>
+            <div>
+                <label><span>Promotion: </span>
+                    <select name="select_promo" id="select_promo">
+                        @foreach ($prom as $row)
+                            <option value="{{ $row->id }}" @if ($row->id == $data->id) selected @endif>
+                                {{ $row->nom }}
+                            </option>
+                        @endforeach
+                    </select>
+                </label>
+                
+                <ul class="ml-5">
+                    @if (count($briefs) > 0)
+                    <h3>Briefs assigned to this promotion:</h3>
+                        @foreach ($briefs[0] as $brief)
+                            <li>
+                                {{ $brief->title_brief }}
+                            </li>
+                        @endforeach
+                    @else
+                            <h3>no briefs assigned to this promotion!</h3>
+                    @endif
+                </ul>
             </div>
         </div>
 
@@ -39,21 +55,21 @@
                 </div>
             </div>
             <div id="appr_content" class="flex-container w-per-10 mt-3">
-                @if ($data[0]->id_appr != null)
-                    @foreach ($data as $row)
+                @if ($data->id != null)
+                    @foreach ($data->apprenants as $row)
                         <div class="flex-item w-6">
                             <div class="picture w-per-4">
                                 <img class="w-per-10" src="{{ URL::asset('images/default-profile-picture.png') }}">
                             </div>
                             <div class="flex-content w-per-6">
-                                <span class="title">{{ $row->nom_appr }} {{ $row->prenom }}</span>
+                                <span class="title">{{ $row->nom }} {{ $row->prenom }}</span>
                                 <span class="sub-title">{{ $row->telephone }}</span>
                                 <span class="sub-title">{{ $row->CIN }}</span>
                             </div>
                             <div class="flex-actions">
-                                <a class="btn edit-btn mr-1 ml-1" id-value="{{ $row->id_appr }}">Edit</a>
+                                <a class="btn edit-btn mr-1 ml-1" id-value="{{ $row->id }}">Edit</a>
                                 <a class="btn delete-btn"
-                                    href="{{ route('delete_appr', ['id_appr' => $row->id_appr]) }}">Delete</a>
+                                    href="{{ route('delete_appr', ['id_appr' => $row->id]) }}">Delete</a>
                             </div>
                         </div>
                     @endforeach
@@ -67,8 +83,7 @@
         <div class="flex-container w-per-5">
             <div class="flex-item ais wrap">
                 <div class="flex-content">
-                    <form class="flex-form" action="{{ route('add_appr', ['id_prom' => $data[0]->id_prom]) }}"
-                        method="POST">
+                    <form class="flex-form" action="{{ route('add_appr', ['id_prom' => $data->id]) }}" method="POST">
                         <h2 class="form-title mb-3">Ajouter Apprenant</h2>
                         {{ csrf_field() }}
                         <label><span>Nom: </span><input type="text" name="nom"></label>
@@ -81,13 +96,15 @@
                         <label><span>address: </span><input type="text" name="address"></label>
                         <label><span>filiere: </span><input type="text" name="filiere"></label>
                         <label></label>
-                        <input type="submit" name="submit" style="display: none;">
+                        <label>
+                            <input type="submit" class="btn edit-btn" id="add_appr" name="submit">
+                        </label>
                         <i id="close_btn" class="fa-solid fa-circle-xmark"></i>
                     </form>
                 </div>
-                <div class="popup-actions mt-3">
-                    <label class="btn edit-btn" for="edit_appr">Submit</label>
-                </div>
+                {{-- <div class="popup-actions mt-3">
+                    <label class="btn edit-btn" for="add_appr">Submit</label>
+                </div> --}}
             </div>
         </div>
     </div>
